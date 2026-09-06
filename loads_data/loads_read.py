@@ -1,16 +1,21 @@
+# 1_pandas_numpy_basics/load_and_read.py
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
-df = pd.read_csv('../data/dataset.csv')
-print("first  5 rowa ",df.head())
-print("last 5 rows", df.tail())
-print("\ncolumn  infomation ")
+# Step 1: Load the CSV into a DataFrame
+dataset_path = Path(__file__).resolve().parent.parent / 'data' / 'dataset.csv'
+
+df = pd.read_csv(dataset_path)
+
+# Step 2: Read/explore with pandas
+print("First 5 rows:\n", df.head())
+print("\nColumn info:\n")
 df.info()
+print("\nStatistical summary:\n", df.describe())
 
-print("\n this stastistical summary of the dataset:\n", df.describe())
-
-
-rating_array = df['rating'].to.numpy()
-print("\nmean rating of the dataset is ", np.mean(rating_array))
-print("\n standard deviation of the rating is ", np.std(rating_array))
-print("\n Unique user",np.unique(df['userId']).size)
+# Step 3: Same data, using numpy directly (lower-level, faster for pure math)
+ratings_array = df['Rating'].to_numpy()
+print("\nMean rating (numpy):", np.mean(ratings_array))
+print("Standard deviation:", np.std(ratings_array))
+print("Total users:", np.unique(df['User_ID']).size)
