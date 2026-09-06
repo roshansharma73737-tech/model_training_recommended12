@@ -13,6 +13,17 @@ user_average = df.groupby('User_ID')['Rating'].mean().reset_index()
 
 
 # line ploting 
-plt.figure(figure =(10,5))
-plt.plot(user_average['User_ID'][:50],user_average['Rating'][:50], mark = 'o')
-plt.titl()
+plt.figure(figsize =(10,5))
+plt.plot(user_average['User_ID'][:50],user_average['Rating'][:50], marker = 'o')
+plt.title('Average RAting per user (first  10 users )')
+plt.xlabel('user id ')
+plt.ylabel('Average rating  ')
+plt.grid(True)
+plt.savefig('rating_trend.png')
+plt.show()
+
+
+# step  3 --> Analyze the  whatls charts shows ->
+print( "highest  avrg  rating user:\n",user_average.loc[user_average['Rating'].idxmax()])
+print("\nlowest aveerage rating user:\n",user_average.loc[user_average['Rating'].idxmin()])
+print("\n Overall average rating across all users:", user_average['Rating'].mean())
