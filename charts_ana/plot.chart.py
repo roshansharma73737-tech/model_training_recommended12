@@ -1,5 +1,4 @@
-import pandas as pd
-import numpy as np
+import pandas as pd 
 import matplotlib.pyplot as plt
 from pathlib import Path
 
@@ -25,5 +24,5 @@ plt.show()
 
 # step  3 --> Analyze the  whatls charts shows ->
 print( "highest  avrg  rating user:\n",user_average.loc[user_average['Rating'].idxmax()])
-print("\nlowest aveerage rating user:\n",user_average.loc[user_average['Rating'].idxmin()])
+print("\nlowest average rating user:\n",user_average.loc[user_average['Rating'].idxmin()])
 print("\n Overall average rating across all users:", user_average['Rating'].mean())
