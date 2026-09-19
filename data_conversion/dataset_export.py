@@ -1,13 +1,12 @@
 import zipfile
 from pathlib import Path
-import warnings
 
 import pandas as pd
 import requests 
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-# Ignore the expired SSL warning only for this educational download
-warnings.filterwarnings('ignore', category=InsecureRequestWarning)
+
+# Ignore the expire ()SSL warning only for this educational download
+
 
 # -------------------------------
 # 1. Set project folders
@@ -49,9 +48,12 @@ if not raw_file.exists():
 columns = ['user_id', 'item_id', 'rating', 'timestamp']
 raw = pd.read_csv(raw_file, sep='\t', names=columns)
 
+
 # -------------------------------
 # 5. Save converted CSV
 # -------------------------------
+
+
 output_csv = data_dir / 'dataset.csv'
 raw.to_csv(output_csv, index=False)
 

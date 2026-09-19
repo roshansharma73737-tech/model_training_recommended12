@@ -1,5 +1,5 @@
 # 1_pandas_numpy_basics/load_and_read.py
-import pandas as pd
+import pandas as pd 
 import numpy as np
 from pathlib import Path
 
