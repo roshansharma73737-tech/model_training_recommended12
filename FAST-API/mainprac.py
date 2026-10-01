@@ -25,6 +25,7 @@ def sending(email: str , task: BackgroundTasks):
     task.add_task(send_email,email)
     return {"message": "Account created ! "}
 
+
 @app.get("/admin/data")
 def admin_data(token: str = Depends(verify_token)):
     return {"secret": "only logged-in users can see this"}
