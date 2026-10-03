@@ -8,8 +8,7 @@ class  productArea(BaseModel):
     price:float
     stock: int = 0 
 
-
-class  productUpdate(  BaseModel):
+class productUpdate(  BaseModel):
     name: Optional[str] = None
     price : Optional[float] = None
     stock : Optional[int] = None
