@@ -1,33 +1,44 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker , declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.engine import URL
 import os
 from dotenv import load_dotenv
 
-
-# -- load_dotenv 
 load_dotenv()
 
-DB_Users = os.getenv("DB_users")
-DB_Name = os.getenv("DB_name")
-DB_Host = os.getenv("DB_host")
-DB_POrt = os.getenv("DB_port ")
-DB_passworD = os.getenv("DB_password")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
 
+DATABASE_URL = URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=int(DB_PORT),
+    database=DB_NAME,
+)
 
-# for only genral prin the  url ( not mandatory )
-database_URL =  f"mysql+pymysql://{DB_Users}:{DB_passworD}:{DB_Host}:{DB_POrt}/{DB_Name}"
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    pool_recycle=3600,
+    echo=False
+)
 
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
-# create the engine  for the connection ----
-
-engine = create_engine( database_URL,  pool_pre_ping=True, pool_recycle=3600, echo=False)
-sessionLocal =  sessionmaker(autocommit = False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-#  create the function  for the check the request of the connection or not -->
 
-def get_connection():
-    db =sessionLocal()
+def get_db():
+    db = SessionLocal()
     try:
         yield db
     finally:
